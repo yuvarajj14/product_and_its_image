@@ -1,0 +1,15 @@
+<p>
+  <strong>Product Name:</strong>
+  <%= @product.name %>
+</p>
+<% if @product.product_images.present? %>
+  <ol>
+  <h3>Images</h3>
+  <% for product_image in @product.product_images %>
+    <li><%=h image_tag product_image.image.url(:medium) %></li>
+  <% end %>
+  </ol>
+<% else %>  
+  <h4>No Images to display</h4>
+<% end %>  
+<%= link_to "Back", root_path %>

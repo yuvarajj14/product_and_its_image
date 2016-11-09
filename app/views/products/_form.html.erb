@@ -1,0 +1,35 @@
+<%= form_for @product, html: { multipart: true } do |f| %>
+ 
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@product.errors.count, "error") %> prohibited
+        this product from being saved:
+      </h2>
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <div id="user_meta_contents">
+    <%= f.fields_for :product_images do |product_image| %>
+      <%= render "product_image_fields", :f => product_image %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Product Image', f, :product_images %>
+    </div>
+  </div> 
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
